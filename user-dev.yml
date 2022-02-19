@@ -1,0 +1,40 @@
+
+#声明微服务的web端口号
+server:
+  port: 8001
+
+#声明微服务的应用名称
+spring:
+  application:
+    name: microservice-user
+
+  #设置数据源
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.188.140:3306/jsd21132?characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 123456
+
+  #设置jpa正向工程
+  jpa:
+    database: mysql       #数据库产品
+    generate-ddl: true    #生成建表语句，自动建表
+    show-sql: true        #显示sql语句
+
+#eureka客户端向eureka服务器注册
+eureka:
+  client:
+    #eureka客户端向eureka服务器注册
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://192.168.188.1:8888/eureka
+
+  #微服务的提供方与eureka服务器的约定
+  instance:
+    lease-renewal-interval-in-seconds: 10 #每30秒发送一次心跳 默认30秒
+    lease-expiration-duration-in-seconds: 30 #租借到期时间间隔为90秒
+    #90秒内eureka服务器没有接收到一次心跳，表名注册微服务失效，删除
+
+
+
